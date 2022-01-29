@@ -38,8 +38,14 @@ public class PlayerController : MonoBehaviour
     
     void Update(){
         
-        if(Input.GetKeyDown(KeyCode.Space)){
-            rb.gravityScale *= -1;
+        if(Input.GetKeyDown(KeyCode.Space) && isGrounded == true){
+            if (top == true ){
+                rb.gravityScale *= -1;
+                transform.position += new Vector3(0, 2, 0);
+            } else {
+                rb.gravityScale *= -1;
+                transform.position -= new Vector3(0, 2, 0);
+            }
             Rotation();
         }
         if(Input.GetKeyDown(KeyCode.W) && isGrounded == true){
