@@ -30,14 +30,18 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(moveInput*speed, rb.velocity.y);
         
         if(facingRight == false && moveInput > 0){
-            Flip();
+            reflect();
         } else if (facingRight == true && moveInput <0){
-            Flip();
+            reflect();
         }
     }
     
     void Update(){
-        
+        jump();
+        flip();
+    }
+    
+    void flip(){
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded == true){
             if (top == true ){
                 rb.gravityScale *= -1;
@@ -48,6 +52,9 @@ public class PlayerController : MonoBehaviour
             }
             Rotation();
         }
+    }
+    
+    void jump(){
         if(Input.GetKeyDown(KeyCode.W) && isGrounded == true){
             if (top == true){
                 rb.velocity = Vector2.up * -jumpForce;
@@ -57,7 +64,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    void Flip(){
+    void reflect(){
         facingRight = !facingRight;
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
