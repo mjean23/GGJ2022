@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     
     public bool facingRight = true;
+    
     private bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
+    
+    private bool top = false;
     
     void Start(){
         rb = GetComponent<Rigidbody2D>();
@@ -35,9 +38,17 @@ public class PlayerController : MonoBehaviour
     
     void Update(){
         
-        /*if(Input.GetKeyDown(KeyCode.W)){
-            rb.velocity = Vector2.up * jumpForce;
-        }*/
+        if(Input.GetKeyDown(KeyCode.Space)){
+            rb.gravityScale *= -1;
+            Rotation();
+        }
+        if(Input.GetKeyDown(KeyCode.W) && isGrounded == true){
+            if (top == true){
+                rb.velocity = Vector2.up * -jumpForce;
+            } else {
+                rb.velocity = Vector2.up * jumpForce;
+            }
+        }
     }
     
     void Flip(){
@@ -47,4 +58,14 @@ public class PlayerController : MonoBehaviour
         transform.localScale = Scaler;
     }
     
+    void Rotation(){
+        if(top == false){
+            transform.eulerAngles = new Vector3(0,0,180f);
+        } else {
+            transform.eulerAngles = Vector3.zero;
+        }
+        
+        facingRight = !facingRight;
+        top = !top;
+    }
 }
