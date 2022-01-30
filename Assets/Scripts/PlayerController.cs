@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
+    public bool atBoundary;
     
     private bool top = false;
     
