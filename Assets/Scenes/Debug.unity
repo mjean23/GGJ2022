@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 656585577}
   - component: {fileID: 656585576}
   - component: {fileID: 656585575}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -727,7 +727,7 @@ GameObject:
   - component: {fileID: 1086049110}
   - component: {fileID: 1086049109}
   - component: {fileID: 1086049108}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Ground (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,6 +1082,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  whatIsGround2:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &1392313041
 Rigidbody2D:
   serializedVersion: 4

@@ -13,18 +13,24 @@ public class PlayerController : MonoBehaviour
     public bool facingRight = true;
     
     private bool isGrounded;
+    private bool isBound;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
+    public LayerMask whatIsGround2;
     
     private bool top = false;
+    
+    //private flagCollision flag;
     
     void Start(){
         rb = GetComponent<Rigidbody2D>();
     }
+    
     void FixedUpdate(){
         
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+        isBound = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround2);
         
         moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput*speed, rb.velocity.y);
@@ -40,18 +46,24 @@ public class PlayerController : MonoBehaviour
         jump();
         flip();
     }
-    
     void flip(){
-        if(Input.GetKeyDown(KeyCode.Space) && isGrounded == true){
-            if (top == true ){
-                rb.gravityScale *= -1;
-                transform.position += new Vector3(0, 2, 0);
-            } else {
-                rb.gravityScale *= -1;
-                transform.position -= new Vector3(0, 2, 0);
+        if(Input.GetKeyDown(KeyCode.Space) && isGrounded == true || isBound == true ){
+            if (isGrounded == true){
+                if (top == true ){
+                    rb.gravityScale *= -1;
+                    transform.position += new Vector3(0, 2, 0);
+                } else {
+                    rb.gravityScale *= -1;
+                    transform.position -= new Vector3(0, 2, 0);
+                }
+            }
+            if (isBound == true){
+                    rb.gravityScale *= -1;
+                
             }
             Rotation();
         }
+        
     }
     
     void jump(){
